@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TCPAsynchronousClient
 {
-    public class TCPAsynchronousClient
+    public class AsynchronousClient
     {
         // *** Event Handlers *** //
 
@@ -40,7 +40,7 @@ namespace TCPAsynchronousClient
         /// </summary>
         /// <param name="_ip">Server IP</param>
         /// <param name="_port">Server Port</param>
-        public TCPAsynchronousClient(string _ip, int _port)
+        public AsynchronousClient(string _ip, int _port)
         {
             ipAddress = IPAddress.Parse(_ip);
             port = _port;
@@ -136,33 +136,36 @@ namespace TCPAsynchronousClient
         {
             Socket _socket = (Socket)ar.AsyncState;
 
-            try
+            if (IsConnected())
             {
-                // Check data is available
-                int nBytesRec = _socket.EndReceive(ar);
-                if (nBytesRec > 0)
+                try
                 {
-                    string sRecieved = "";
-                    for (int i = 0; i < nBytesRec; i++)
+                    // Check data is available
+                    int nBytesRec = _socket.EndReceive(ar);
+                    if (nBytesRec > 0)
                     {
-                        sRecieved += (char)readerBuffer[i];
+                        string sRecieved = "";
+                        for (int i = 0; i < nBytesRec; i++)
+                        {
+                            sRecieved += (char)readerBuffer[i];
+                        }
+
+                        // Fire Data Recieved Event
+                        OnDataRecievedEvent(sRecieved);
+
+                        // If the Connection is Still Usable Restablish the Callback
+                        SetupRecieveCallback(_socket);
                     }
-
-                    // Fire Data Recieved Event
-                    OnDataRecievedEvent(sRecieved);
-
-                    // If the Connection is Still Usable Restablish the Callback
-                    SetupRecieveCallback(_socket);
+                    else
+                    {
+                        Dispose();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     Dispose();
+                    throw new Exception("Recieve Operation Failed");
                 }
-            }
-            catch (Exception ex)
-            {
-                Dispose();
-                throw new Exception("Recieve Operation Failed");
             }
         }
 

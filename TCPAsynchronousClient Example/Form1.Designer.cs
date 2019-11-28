@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnConnect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,12 +38,13 @@
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.rtfLog = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtWrite = new System.Windows.Forms.TextBox();
             this.btnWrite = new System.Windows.Forms.Button();
+            this.txtWrite = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblConnected = new System.Windows.Forms.Label();
             this.lblRead = new System.Windows.Forms.Label();
             this.lblWrite = new System.Windows.Forms.Label();
+            this.timClear = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +57,7 @@
             this.btnConnect.TabIndex = 0;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // label1
             // 
@@ -113,6 +116,7 @@
             this.btnDisconnect.TabIndex = 5;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // rtfLog
             // 
@@ -135,22 +139,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Write Data";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Data";
-            // 
-            // txtWrite
-            // 
-            this.txtWrite.Location = new System.Drawing.Point(91, 29);
-            this.txtWrite.Name = "txtWrite";
-            this.txtWrite.Size = new System.Drawing.Size(198, 20);
-            this.txtWrite.TabIndex = 1;
-            // 
             // btnWrite
             // 
             this.btnWrite.Location = new System.Drawing.Point(214, 55);
@@ -159,6 +147,23 @@
             this.btnWrite.TabIndex = 2;
             this.btnWrite.Text = "Write";
             this.btnWrite.UseVisualStyleBackColor = true;
+            this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
+            // 
+            // txtWrite
+            // 
+            this.txtWrite.Location = new System.Drawing.Point(91, 29);
+            this.txtWrite.Name = "txtWrite";
+            this.txtWrite.Size = new System.Drawing.Size(198, 20);
+            this.txtWrite.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Data";
             // 
             // lblConnected
             // 
@@ -183,6 +188,7 @@
             this.lblRead.TabIndex = 9;
             this.lblRead.Text = "Read";
             this.lblRead.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblRead.Visible = false;
             // 
             // lblWrite
             // 
@@ -195,6 +201,13 @@
             this.lblWrite.TabIndex = 10;
             this.lblWrite.Text = "Write";
             this.lblWrite.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWrite.Visible = false;
+            // 
+            // timClear
+            // 
+            this.timClear.Enabled = true;
+            this.timClear.Interval = 1000;
+            this.timClear.Tick += new System.EventHandler(this.timClear_Tick);
             // 
             // Form1
             // 
@@ -237,6 +250,7 @@
         private System.Windows.Forms.Label lblConnected;
         private System.Windows.Forms.Label lblRead;
         private System.Windows.Forms.Label lblWrite;
+        private System.Windows.Forms.Timer timClear;
     }
 }
 

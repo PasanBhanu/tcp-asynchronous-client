@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TCPAsynchronousClient\TCPAsynchronousClient.csproj">
+      <Project>{4af0a15f-dc6c-4dd4-9898-be970b012453}</Project>
+      <Name>TCPAsynchronousClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
