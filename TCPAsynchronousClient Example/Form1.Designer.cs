@@ -110,6 +110,7 @@
             // 
             // btnDisconnect
             // 
+            this.btnDisconnect.Enabled = false;
             this.btnDisconnect.Location = new System.Drawing.Point(214, 81);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
@@ -141,6 +142,7 @@
             // 
             // btnWrite
             // 
+            this.btnWrite.Enabled = false;
             this.btnWrite.Location = new System.Drawing.Point(214, 55);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(75, 23);

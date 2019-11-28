@@ -52,11 +52,17 @@ namespace TCPAsynchronousClient_Example
                     {
                         lblConnected.Text = "Connected";
                         lblConnected.BackColor = System.Drawing.Color.Green;
+                        btnConnect.Enabled = false;
+                        btnDisconnect.Enabled = true;
+                        btnWrite.Enabled = true;
                     }
                     else
                     {
                         lblConnected.Text = "Disconnected";
                         lblConnected.BackColor = System.Drawing.Color.Red;
+                        btnConnect.Enabled = true;
+                        btnDisconnect.Enabled = false;
+                        btnWrite.Enabled = false;
                     }
                     break;
 
@@ -114,6 +120,7 @@ namespace TCPAsynchronousClient_Example
 
         private void timClear_Tick(object sender, EventArgs e)
         {
+            // Clear Notifications
             lblWrite.Visible = false;
             lblRead.Visible = false;
         }
