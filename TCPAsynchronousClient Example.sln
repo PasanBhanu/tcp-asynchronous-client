@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPAsynchronousClient Example", "TCPAsynchronousClient Example\TCPAsynchronousClient Example.csproj", "{0DF6E489-B425-4917-8B01-71D21AEA4C6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPAsynchronousClient", "TCPAsynchronousClient\TCPAsynchronousClient.csproj", "{A9FB2322-AD62-4A48-A122-53B0997B0FD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0DF6E489-B425-4917-8B01-71D21AEA4C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DF6E489-B425-4917-8B01-71D21AEA4C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DF6E489-B425-4917-8B01-71D21AEA4C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9FB2322-AD62-4A48-A122-53B0997B0FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9FB2322-AD62-4A48-A122-53B0997B0FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9FB2322-AD62-4A48-A122-53B0997B0FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9FB2322-AD62-4A48-A122-53B0997B0FD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
