@@ -6,7 +6,7 @@ namespace TCPAsynchronousClient_Example
 {
     public partial class Form1 : Form
     {
-        // For Display Data in Text Box and Info
+        // For Display Data in Text Box and Info - UI Thread Invoke
         public delegate void AddLogDeligate(string data);
         public AddLogDeligate AddLog;
         public delegate void AddNotificationDelegate(int type, bool status);
@@ -18,31 +18,43 @@ namespace TCPAsynchronousClient_Example
         public Form1()
         {
             InitializeComponent();
+
+            // Deligate Methods for UI Thread Invoke
             AddLog = new AddLogDeligate(Log);
             UpdateStatusIcons = new AddNotificationDelegate(StatusUpdate);
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            tcp = new AsynchronousClient(txtIpAddress.Text, int.Parse(txtPort.Text));
-            tcp.OnConnectEvent += new AsynchronousClient.OnConnectEventHandler(OnConnect);
-            tcp.OnDataRecievedEvent += new AsynchronousClient.DataReceivedEventHandler(OnRecieved);
-            tcp.Connect();
+            try
+            {
+                tcp = new AsynchronousClient(txtIpAddress.Text, int.Parse(txtPort.Text));
+                tcp.OnConnectEvent += new AsynchronousClient.OnConnectEventHandler(OnConnect);
+                tcp.OnDataRecievedEvent += new AsynchronousClient.DataReceivedEventHandler(OnRecieved);
+                tcp.Connect();
+            }catch (Exception ex)
+            {
+                // Catch errors in Connection and Recieve Callbacks
+                Log("Error : " + ex.ToString());
+            }
+            
         }
 
+        // Connection Status Listner
         private void OnConnect(bool status)
         {
             rtfLog.Invoke(AddLog, "Connection : " + status.ToString());
             lblConnected.Invoke(UpdateStatusIcons, 1, status);
         }
 
+        // Data Recieved Listner
         private void OnRecieved(string data)
         {
             lblRead.Invoke(UpdateStatusIcons, 3, true);
             rtfLog.Invoke(AddLog, "Recieved : " + data);
         }
 
-
+        // UI Thread Invoker
         private void StatusUpdate(int type, bool status)
         {
             switch (type)
@@ -93,6 +105,7 @@ namespace TCPAsynchronousClient_Example
             }
         }
 
+        // UI Thread Invoker
         private void Log(string _data)
         {
             rtfLog.Text = rtfLog.Text + _data + "\n\n";
@@ -107,20 +120,31 @@ namespace TCPAsynchronousClient_Example
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
+            // UI Notification
             StatusUpdate(2, true);
-            if (tcp.Write(txtWrite.Text))
+
+            // Write to TCP
+            try
             {
-                Log("Write (Success) : " + txtWrite.Text);
-            }
-            else
+                if (tcp.Write(txtWrite.Text))
+                {
+                    Log("Write (Success) : " + txtWrite.Text);
+                }
+                else
+                {
+                    Log("Write (Failed) : Disconnected");
+                }
+            }catch(Exception ex)
             {
-                Log("Write (Failed) : Disconnected");
+                // Catch errors in Sending Data
+                Log("Error : " + ex.ToString());
             }
+            
         }
 
+        // Clear Notifications
         private void timClear_Tick(object sender, EventArgs e)
         {
-            // Clear Notifications
             lblWrite.Visible = false;
             lblRead.Visible = false;
         }
