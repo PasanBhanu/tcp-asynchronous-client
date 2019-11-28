@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.ibb.co/YD7yF8g/image.png">
+</p>
+
 # TCP Asynchronous Client for C#.NET
 TCP Asynchronous Client DLL for C#. Communicate with TCP Server in C# Applications. Simple and less resource usage model without multithreading or waitOne().
 
