@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -33,6 +34,8 @@ namespace TCPAsynchronousClient
         private Socket socket;
         private byte[] readerBuffer = new byte[256];
 
+        private bool debug = false;
+
         // *** Methods *** //
 
         /// <summary>
@@ -40,10 +43,12 @@ namespace TCPAsynchronousClient
         /// </summary>
         /// <param name="_ip">Server IP</param>
         /// <param name="_port">Server Port</param>
-        public AsynchronousClient(string _ip, int _port)
+        /// <param name="_debug">Enable Debug Mode</param>
+        public AsynchronousClient(string _ip, int _port, bool _debug)
         {
             ipAddress = IPAddress.Parse(_ip);
             port = _port;
+            debug = _debug;
         }
 
         /// <summary>
@@ -75,7 +80,7 @@ namespace TCPAsynchronousClient
             catch (Exception ex)
             {
                 OnConnectEvent(false);
-                throw new Exception("Socket Connection Falied. Message : " + ex.ToString());
+                ExceptionManager("Socket Connection Falied. Message : " + ex.ToString());
             }
         }
 
@@ -112,7 +117,7 @@ namespace TCPAsynchronousClient
             }
             catch (Exception ex)
             {
-                throw ex;
+                ExceptionManager(ex.ToString());
             }
         }
 
@@ -127,7 +132,7 @@ namespace TCPAsynchronousClient
             catch (Exception ex)
             {
                 Dispose();
-                throw new Exception("Recieve Callback Setup Failed");
+                ExceptionManager("Recieve Callback Setup Failed");
             }
         }
 
@@ -164,7 +169,7 @@ namespace TCPAsynchronousClient
                 catch (Exception ex)
                 {
                     Dispose();
-                    throw new Exception("Recieve Operation Failed");
+                    ExceptionManager("Recieve Operation Failed");
                 }
             }
         }
@@ -188,7 +193,8 @@ namespace TCPAsynchronousClient
                 catch (Exception ex)
                 {
                     Dispose();
-                    throw new Exception("Data Writing Operation Failed");
+                    ExceptionManager("Data Writing Operation Failed");
+                    return false;
                 }
             }
             else
@@ -215,7 +221,8 @@ namespace TCPAsynchronousClient
                 catch (Exception ex)
                 {
                     Dispose();
-                    throw new Exception("Data Writing Operation Failed");
+                    ExceptionManager("Data Writing Operation Failed");
+                    return false;
                 }
             }
             else
@@ -247,6 +254,18 @@ namespace TCPAsynchronousClient
                 OnConnectEvent(false);
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
+            }
+        }
+
+        // Handle Exceptions
+        private void ExceptionManager(string message)
+        {
+            if (debug)
+            {
+                OnDataRecievedEvent("Exception : " + message);
+                StreamWriter w = File.AppendText("log.txt");
+                w.WriteLine(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " : [" + ipAddress + ":" + port + "] - " + message);
+                w.Close();
             }
         }
     }

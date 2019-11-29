@@ -28,7 +28,7 @@ namespace TCPAsynchronousClient_Example
         {
             try
             {
-                tcp = new AsynchronousClient(txtIpAddress.Text, int.Parse(txtPort.Text));
+                tcp = new AsynchronousClient(txtIpAddress.Text, int.Parse(txtPort.Text), true);
                 tcp.OnConnectEvent += new AsynchronousClient.OnConnectEventHandler(OnConnect);
                 tcp.OnDataRecievedEvent += new AsynchronousClient.DataReceivedEventHandler(OnRecieved);
                 tcp.Connect();
