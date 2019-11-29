@@ -5,9 +5,9 @@
 <div align="center">
  
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/PasanBhanu/tcp-asynchronous-client/issues)
-![Nuget](https://img.shields.io/nuget/v/TCPAsynchronousClient)
+[![Nuget](https://img.shields.io/nuget/v/TCPAsynchronousClient)](https://www.nuget.org/packages/TCPAsynchronousClient)
 [![HitCount](http://hits.dwyl.com/dwyl/start-here.svg)](https://github.com/PasanBhanu/tcp-asynchronous-client)
-![Nuget](https://img.shields.io/nuget/dt/TCPAsynchronousClient)
+[![Nuget](https://img.shields.io/nuget/dt/TCPAsynchronousClient)](https://www.nuget.org/packages/TCPAsynchronousClient)
 
 </div>
 
