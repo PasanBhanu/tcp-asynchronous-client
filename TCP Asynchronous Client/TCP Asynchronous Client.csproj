@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>TCP_Asynchronous_Client</RootNamespace>
+    <AssemblyName>TCPAsynchronousClient</AssemblyName>
+    <PackageId>TCPAsynchronousClient</PackageId>
+    <Company>Softink Lab</Company>
+    <Authors>Pasan Bhanu Guruge</Authors>
+    <Product>TCP Asynchronous Client</Product>
+    <Description>TCP Asynchronous Client DLL for C#. Send and Receive Data with TCP Server Asynchronously in C# Applications</Description>
+    <Copyright>Copyright ©  2019 Softink Lab</Copyright>
+    <PackageProjectUrl>https://github.com/PasanBhanu/tcp-asynchronous-client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PasanBhanu/tcp-asynchronous-client</RepositoryUrl>
+    <PackageTags>v1.0</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>
